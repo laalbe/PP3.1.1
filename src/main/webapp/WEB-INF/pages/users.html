@@ -1,0 +1,36 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Users</title>
+</head>
+<body>
+<div>
+  <h2>Users</h2>
+  <h3><a href="/new">New user</a></h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>LastName</th>
+      <th>Email</th>
+      <th>Changes</th>
+    </tr>
+    <tr th:each="user : ${getAllUsers}">
+      <td th:utext="${user.getId}"...</td>
+      <td th:utext="${user.getName()}">...</td>
+      <td th:utext="${user.getLastName()}">...</td>
+      <td th:utext="${user.getEmail()}">...</td>
+      <td>
+        <a th:href="@{/{id}(id=${user.getId()})}">
+          <input type="submit" value="Update">
+        </a>
+        <br>
+        <br>
+        <form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}" >
+          <input type="submit" value="Delete"/>
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

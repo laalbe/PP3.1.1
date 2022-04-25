@@ -16,6 +16,7 @@ public class UserController {
 
     @GetMapping
     public String getUsers(Model model) {
+        System.out.println(userService.getAllUsers().get(0).getLastName());
         model.addAttribute("getAllUsers", userService.getAllUsers());
         return "users";
     }
@@ -32,20 +33,21 @@ public class UserController {
         return "updateUser";
     }
 
-    @PostMapping
+    @PostMapping()
     public String newMan(@ModelAttribute("user") User user) {
         userService.addUser(user);
         return "redirect:/";
     }
 
-    @PatchMapping("{id}")
-    public String userUpdate(@PathVariable("id") Long id,@ModelAttribute("user") User user) {
+    @PostMapping("{id}")
+    public String userUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         userService.updateUser(user);
         return "redirect:/";
     }
-    @DeleteMapping("delete/{id}")
+    @PostMapping("delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/";
     }
 }
+
